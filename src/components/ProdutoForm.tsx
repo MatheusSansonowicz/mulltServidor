@@ -1,25 +1,35 @@
-import React, {useState} from 'react'
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import type {Produto} from "../model/Produto.ts";
-import {api} from "../service/Api.ts";
+// Importa o hook useState para gerenciar estado local no componente
+import { useState } from 'react'
+// Importa os hooks de mutação e controle de cache do React Query
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+// Importa a instância do Axios configurada para fazer requisições à API
+import { api } from '../service/Api'
+// Importa o tipo Produto, que representa a estrutura dos dados de produto
+import type { Produto } from '../model/Produto'
+// Importa o CSS específico do formulário
+import "../components/ProductForm.css"
 
-export interface ProductForm {
-    onClose: () => void
+// Define a interface que especifica que o componente receberá uma função onClose como prop
+interface ProductFormProps {
+    onClose: () => void // Função chamada para fechar o modal
 }
 
-export function produtoForm({onClose}: ProductForm) {
-
+// Componente funcional que recebe onClose como prop
+export function ProductForm({ onClose }: ProductFormProps) {
+    // Hook do React Query que permite invalidar queries e atualizar o cache
     const queryClient = useQueryClient()
 
+    // Define o estado local para armazenar os dados do formulário (exceto o campo 'id')
     const [formData, setFormData] = useState<Omit<Produto, 'id'>>({
-        nome: '',
-        descricao: '',
-        preco:0,
-        categoria: '',
-        disponibilidade: true,
-        imagem: '',
+        nome: '',          // Nome do produto
+        descricao: '',     // Descrição do produto
+        preco: 0,          // Preço do produto
+        imagem: '',        // URL da imagem do produto
+        categoria: '',     // Categoria do produto
+        disponibilidade: true,  // Disponibilidade (true = disponível)
     })
 
+    // Define a mutação (ação de enviar dados para a API)
     const mutation = useMutation({
         // Função de envio chamada quando o formulário for submetido
         mutationFn: async (novoProduto: Omit<Produto, 'id'>) => {
@@ -58,6 +68,7 @@ export function produtoForm({onClose}: ProductForm) {
         mutation.mutate(formData)   // Envia os dados usando a mutação definida
     }
 
+    // Renderiza o formulário com os campos de entrada
     return (
         <form className="formProduto" onSubmit={handleSubmit} style={{ margin: '20px' }}>
             <h2>Cadastrar Novo Produto</h2>

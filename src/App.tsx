@@ -1,8 +1,8 @@
 import { useState } from "react"
 // Importa o componente que exibe a lista de produtos
-import { ProductList } from './components/ProdutoList.tsx'
+import { ProductList } from './components/ProdutoList'
 // Importa o formulário de cadastro de produtos
-import { ProductForm } from './components/ProdutoForm.tsx'
+import type { produtoForm } from './components/ProdutoForm'
 // Importa o componente Modal, que será usado para exibir o formulário como pop-up
 import { Modal } from './components/Modal'
 
@@ -21,10 +21,9 @@ function App() {
                     <button onClick={() => setShowForm(true)}>Novo Produto</button>
                 </div>
 
-                {/* Modal que envolve o formulário. Só é exibido se showForm for true */}
                 <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
-                    {/* O formulário recebe a função para fechar o modal após o envio }
-                    <ProductForm onClose={() => setShowForm(false)} />
+
+                    <produtoForm onClose={() => setShowForm(false)} />
                 </Modal>
 
                 {/* Componente que exibe a lista dos produtos cadastrados */}
