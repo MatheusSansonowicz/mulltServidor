@@ -6,9 +6,6 @@ import { ProductForm } from './components/ProdutoForm'
 // Importa o componente Modal, que será usado para exibir o formulário como pop-up
 import { Modal } from './components/Modal'
 
-function App() {
-
-  const [count, setCount] = useState(0)
     function App() {
         // Cria um estado booleano chamado showForm, que indica se o modal deve ser exibido ou não
         const [showForm, setShowForm] = useState(false)
@@ -21,6 +18,7 @@ function App() {
                     <button onClick={() => setShowForm(true)}>Novo Produto</button>
                 </div>
 
+                {/* Modal que envolve o formulário. Só é exibido se showForm for true */}
                 <Modal isOpen={showForm} onClose={() => setShowForm(false)}>
                     {/* O formulário recebe a função para fechar o modal após o envio */}
                     <ProductForm onClose={() => setShowForm(false)} />
@@ -31,7 +29,5 @@ function App() {
             </>
         )
     }
-
-}
 
 export default App
