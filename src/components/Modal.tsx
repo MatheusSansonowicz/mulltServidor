@@ -1,6 +1,6 @@
 import React from 'react'
 
-//import "Modalcss.css"
+import "./Modal.css"
 
 interface ModalProps {
 
