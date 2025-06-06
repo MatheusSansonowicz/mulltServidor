@@ -3,7 +3,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import type {Produto} from "../model/Produto.ts";
 import {api} from "../service/Api.ts";
 
-interface ProductForm {
+export interface ProductForm {
     onClose: () => void
 }
 
